@@ -2,8 +2,6 @@ const dbConnection = require("../db/connection-wrapper");
 const authQuery = require("../sql/query/authQuery");
 
 
-
-
 async function createUserLog(userLog) {
     let sql;
     let parameters;
@@ -36,12 +34,13 @@ async function createUserLog(userLog) {
         ];
     }
 
-    let userLogResult = await connection.executeWithParameters(sql, parameters);
+    let userLogResult = await dbConnection.executeWithParameters(sql, parameters);
     return userLogResult;
 }
 
 
 async function getActivities(userId) {
+
     let sql = `
      SELECT
        sc.name ,
@@ -56,8 +55,7 @@ async function getActivities(userId) {
       left JOIN revenue_categorys rc ON rc.id = ul.revenue_category
     WHERE ul.user_id=?`;
     let parameters=[userId];
-    let userLogs = await connection.executeWithParameters(sql, parameters);   
-
+    let userLogs = await dbConnection.executeWithParameters(sql, parameters);   
     if (!userLogs) {
         return null;
     }

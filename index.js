@@ -10,7 +10,7 @@ const launchServer = async () => {
       await RabbitConnectionManager.initialize()
       await RabbitConnectionManager.listenToQueueMessages(RABBIT_MQ_INSTANCE_NAME,SERVER_LOGS,messageTypeQueue)
   
-      console.log('[SERVER] User service is running successfully')
+      console.log('[SERVER] User LOG service is running successfully')
 
     } catch (error) {
     console.log(error)

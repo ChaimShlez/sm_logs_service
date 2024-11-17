@@ -15,13 +15,14 @@ const messageTypeQueue = async (incomingMessage) => {
       let extractData;
       let response;
       switch (parsedMessage.type) {
+  
         case QueueMessageType.createLog:
-          extractData = parsedMessage.data.createLog;
-          response = await serviceLogic.createUserLog(extractData)
+          extractData = parsedMessage.data.userLog
+          await serviceLogic.createUserLog(extractData)
+          response = await serviceLogic.getActivities(extractData.userId)
           break;
-
           case QueueMessageType.getLogs:
-          extractData = parsedMessage.data.Logs;
+          extractData = parsedMessage.data.userId;
           response = await serviceLogic.getActivities(extractData)
           break;
         default:
